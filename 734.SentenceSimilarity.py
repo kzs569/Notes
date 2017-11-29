@@ -9,6 +9,7 @@ class Solution:
         from collections import defaultdict
         if len(words1) != len(words2):
             return False
+        # collections.default(list) is equal to dict.setdefault() but faster
         words = defaultdict(set)
         for word1,word2 in pairs:
             words[word1].add(word2)

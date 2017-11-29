@@ -1,4 +1,5 @@
 class Solution:
+	#recursive dfs
     def floodFill(self,image, sr, sc, newColor):
         import numpy as np
         """
@@ -37,3 +38,22 @@ class Solution:
             self.dfs(sr,sc+1,oldColor,newColor)
             self.dfs(sr-1,sc,oldColor,newColor)
             self.dfs(sr,sc-1,oldColor,newColor)
+
+      #iterative bfs
+      def floodFill(self,image,sr,sc,newColor):
+      	  dxs = [1,0,-1,0]
+      	  dys = [0,1,0,-1]
+      	  queue = [(sr,sc)]
+      	  oldColor = image[sr][sc]
+      	  image[sr][sc] = newColor
+      	  while queue:
+      	  	x,y = queue.pop(0)
+      	  	for dx,dy in zip(dxs,dys):
+      	  		nx,ny = x + dx,y + dy
+      	  		if 0 <= nx <len(image) and 0 <= ny < len(image[0]):
+      	  			if image[nx][ny] != newColor and image[nx][ny] == oldColor:
+      	  				image[nx][ny] = newColor
+      	  				queue.append((nx,ny))
+      	  return image;
+
+
