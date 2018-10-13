@@ -9,9 +9,11 @@
 
     [CyC2018/剑指Offer题解](https://github.com/CyC2018/CS-Notes/blob/master/notes/%E5%89%91%E6%8C%87%20offer%20%E9%A2%98%E8%A7%A3.md)
 
+3. 2018年相关顶会内容总结
 
+    - [COLT 18](./Conference/colt_18.md)
 
-3. 其他内容总结
+4. 其他内容总结
 
 ## Inference
 
