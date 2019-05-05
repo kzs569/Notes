@@ -13,7 +13,8 @@
 
     - [COLT 18](./Conference/colt_18.md)
 
-4. 其他内容总结
+4. 深度学习相关论文总结
+    
 
 ## Inference
 
@@ -24,3 +25,7 @@
 [CyC2018/CS_Notes](https://github.com/CyC2018/CS-Notes)
 
 *算法、工程偏多*
+
+[DL Interview 深度学习面试题收集](https://github.com/ShanghaiTechAIClub/DLInterview)
+
+*面试题目收集（目前已停更）2019.01

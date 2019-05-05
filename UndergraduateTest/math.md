@@ -1,3 +1,49 @@
+## 数列&极限
+1. (张宇八套卷(一).10)
+<img src="https://latex.codecogs.com/gif.latex?\lim_{n\rightarrow\infty}\frac{1}{n}(n!)^{\frac{1}{n}}=" title="\lim_{n\rightarrow\infty}\frac{1}{n}(n!)^{\frac{1}{n}}=" />
+
+<img src="https://latex.codecogs.com/gif.latex?\frac{1}{n}(n!)^{\frac{1}{n}}=&space;(\frac{n!}{n^n})^{\frac{1}{n}}=exp\{\frac{1}{n}\sum^n_{i=1}ln\frac{i}{n}\}" title="\frac{1}{n}(n!)^{\frac{1}{n}}= (\frac{n!}{n^n})^{\frac{1}{n}}=exp\{\frac{1}{n}\sum^n_{i=1}ln\frac{i}{n}\}" />
+
+<img src="https://latex.codecogs.com/gif.latex?\lim_{n\rightarrow\infty}\frac{1}{n}(n!)^{\frac{1}{n}}=exp\{\lim_{n\rightarrow\infty}\frac{1}{n}\sum^n_{i=1}ln\frac{i}{n}\}=e^{\int^1_0lnxdx}=e^{-1}" title="\lim_{n\rightarrow\infty}\frac{1}{n}(n!)^{\frac{1}{n}}=exp\{\lim_{n\rightarrow\infty}\frac{1}{n}\sum^n_{i=1}ln\frac{i}{n}\}=e^{\int^1_0lnxdx}=e^{-1}" />
+
+2. (张宇八套卷(三).01)设g(x)在x=0的某邻域内连续且
+<img src="https://latex.codecogs.com/gif.latex?\lim_{x\rightarrow0}\frac{g(x)}{x}=\frac{1}{4}" title="\lim_{x\rightarrow0}\frac{g(x)}{x}=\frac{1}{4}" />
+.又设f(x)在该邻域内存在二阶导数且满足
+<img src="https://latex.codecogs.com/gif.latex?x^2f''(x)-[f'(x)]^2=xg(x)" title="x^2f''(x)-[f'(x)]^2=xg(x)" />
+。则
+
+A.f(0)是f(x)的极大值
+
+**B.f(0)是f(x)的极小值**
+
+C.f(0)不是f(x)的极值
+
+D.f(0)是否为f(x)的极值要由具体的g(x)决定
+
+由题意易知，
+<img src="https://latex.codecogs.com/gif.latex?g(0)=\lim_{x\rightarrow0}g(x)=\lim_{x\rightarrow0}x\cdot\frac{g(x)}{x}=0" title="g(0)=\lim_{x\rightarrow0}g(x)=\lim_{x\rightarrow0}x\cdot\frac{g(x)}{x}=0" />
+
+<img src="https://latex.codecogs.com/gif.latex?f'(x)^2|_{x=0}=x^2f''(x)-xg(x)=0" title="f'(x)^2|_{x=0}=x^2f''(x)-xg(x)=0" />
+
+从而得到，
+<img src="https://latex.codecogs.com/gif.latex?f''(0)=\lim_{x\rightarrow0}\frac{f'(x)-f'(0)}{x-0}=\lim_{x\rightarrow0}\frac{f'(x)}{x}" title="f''(0)=\lim_{x\rightarrow0}\frac{f'(x)-f'(0)}{x-0}=\lim_{x\rightarrow0}\frac{f'(x)}{x}" />
+然后对所给方程左右两边同除x^2,并求极限
+<img src="https://latex.codecogs.com/gif.latex?\lim_{x\rightarrow0}f''(x)-\lim_{x\rightarrow0}\frac{f'(x)}{x}=-\lim_{x\rightarrow0}f''(x)=\lim_{x\rightarrow0}\frac{g(x)}{x}=\frac{1}{4}" title="\lim_{x\rightarrow0}f''(x)-\lim_{x\rightarrow0}\frac{f'(x)}{x}=-\lim_{x\rightarrow0}f''(x)=\lim_{x\rightarrow0}\frac{g(x)}{x}=\frac{1}{4}" />
+
+所以，<img src="https://latex.codecogs.com/gif.latex?\lim_{x\rightarrow0}f''(x)=-\frac{1}{4}" title="\lim_{x\rightarrow0}f''(x)=-\frac{1}{4}" />
+根据函数的保号性f'(x)在x=0的一个邻域内单调递减，又f'(0)=0,所以f(0)是f(x)的极小值。
+
+3.(张宇八套卷(二).12)设<img src="https://latex.codecogs.com/gif.latex?u_n=\sum^n_{k=1}\frac{k}{(n&plus;k)(n&plus;k&plus;1)},\lim_{n\rightarrow\infty}u_n=" title="u_n=\sum^n_{k=1}\frac{k}{(n+k)(n+k+1)},\lim_{n\rightarrow\infty}u_n=" />
+
+夹逼定理：
+
+<img src="https://latex.codecogs.com/gif.latex?\frac{k}{(n&plus;k)(n&plus;k&plus;1)}&space;\leq&space;\frac{1}{n}\frac{\frac{k}{n}}{(1&plus;\frac{k}{n})^2}" title="\frac{k}{(n+k)(n+k+1)} \leq \frac{1}{n}\frac{\frac{k}{n}}{(1+\frac{k}{n})^2}" />
+
+<img src="https://latex.codecogs.com/gif.latex?\lim_{n\rightarrow\infty}\frac{1}{n}\sum^n_{k=1}\frac{\frac{k}{n}}{(1&plus;\frac{k}{n})^2}=\int^1_0\frac{x}{(1&plus;x)^2}dx=ln2&plus;1/2" title="\lim_{n\rightarrow\infty}\frac{1}{n}\sum^n_{k=1}\frac{\frac{k}{n}}{(1+\frac{k}{n})^2}=\int^1_0\frac{x}{(1+x)^2}dx=ln2+1/2" />
+
+<img src="https://latex.codecogs.com/gif.latex?\frac{k}{(n&plus;k)(n&plus;k&plus;1)}=\frac{1}{n&plus;1}\frac{\frac{k}{n}}{(1&plus;\frac{k}{n})(1&plus;\frac{k}{n&plus;1})}\geq&space;\frac{n}{n&plus;1}[\frac{1}{n}\frac{\frac{k}{n}}{(1&plus;\frac{k}{n})^2}]" title="\frac{k}{(n+k)(n+k+1)}=\frac{1}{n+1}\frac{\frac{k}{n}}{(1+\frac{k}{n})(1+\frac{k}{n+1})}\geq \frac{n}{n+1}[\frac{1}{n}\frac{\frac{k}{n}}{(1+\frac{k}{n})^2}]" />
+
+<img src="https://latex.codecogs.com/gif.latex?\lim_{n\rightarrow\infty}&space;\frac{n}{n&plus;1}[\frac{1}{n}\sum^n_{k=1}\frac{\frac{k}{n}}{(1&plus;\frac{k}{n})^2}]=\lim_{n\rightarrow\infty}\frac{n}{n&plus;1}\int^1_0\frac{x}{(1&plus;x)^2}dx=ln2&plus;1/2" title="\lim_{n\rightarrow\infty} \frac{n}{n+1}[\frac{1}{n}\sum^n_{k=1}\frac{\frac{k}{n}}{(1+\frac{k}{n})^2}]=\lim_{n\rightarrow\infty}\frac{n}{n+1}\int^1_0\frac{x}{(1+x)^2}dx=ln2+1/2" />
 
 ## 反常积分
 1. (2016.1)若反常积分
@@ -41,6 +87,55 @@
     综上，则a<1且a+b>1时反常积分
     <a href="https://www.codecogs.com/eqnedit.php?latex=\int^{&plus;\infty}_0\frac{1}{x^a(1&plus;x)^b}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\int^{&plus;\infty}_0\frac{1}{x^a(1&plus;x)^b}" title="\int^{+\infty}_0\frac{1}{x^a(1+x)^b}" /></a>
     收敛
+
+## 空间解析几何与向量代数
+1. (张宇八套卷(一).01)
+
+![images](./Pics/math_1.png)
+
+<img src="./Pics/math_2.png" width = "300" height = "300" />
+
+
+作水平刨面，此刨面切在离底h处，图中阴影是一个正方形，此正方形的边长为
+<img src="https://latex.codecogs.com/gif.latex?\sqrt{R^2-h^2}" title="\sqrt{R^2-h^2}" />
+。于是正方形的面积为
+<img src="https://latex.codecogs.com/gif.latex?R^2-h^2" title="R^2-h^2" />
+。用微元法，薄片的厚度为dh,薄片的体积：
+
+<img src="https://latex.codecogs.com/gif.latex?dV=(R^2&space;-&space;h^2)dh" title="dV=(R^2 - h^2)dh" />
+
+<img src="https://latex.codecogs.com/gif.latex?V=\int_0^R&space;(R^2&space;-&space;h^2)dh=(R^2h&space;-&space;\frac{1}{3}h^3)|^R_0=\frac{2}{3}R^3" title="V=\int_0^R (R^2 - h^2)dh=(R^2h - \frac{1}{3}h^3)|^R_0=\frac{2}{3}R^3" />
+
+图中画的是整个公共部分的1/8，所以所求公共部分是
+<img src="https://latex.codecogs.com/gif.latex?\frac{16}{3}R^3" title="\frac{16}{3}R^3" />
+。
+
+
+2. (张宇八套卷(二).04)空间n个点
+<img src="https://latex.codecogs.com/gif.latex?P_i(x_i,y_i,z_i),i=1,2,...,n,n\geq4" title="P_i(x_i,y_i,z_i),i=1,2,...,n,n\geq4" />
+矩阵
+
+<img src="https://latex.codecogs.com/gif.latex?A=&space;\begin{bmatrix}&space;x_1&space;&&space;y_1&space;&&space;z_1&space;&&space;1\\&space;x_2&space;&&space;y_2&space;&&space;z_2&space;&&space;1\\&space;...&space;&&space;...&space;&&space;...&space;&&space;...\\&space;x_n&space;&&space;y_n&space;&&space;z_n&space;&&space;1&space;\end{bmatrix}" title="A= \begin{bmatrix} x_1 & y_1 & z_1 & 1\\ x_2 & y_2 & z_2 & 1\\ ... & ... & ... & ...\\ x_n & y_n & z_n & 1 \end{bmatrix}" />
+
+的秩记为r，则n个点共面的充分必要条件是（）
+
+A. r=1 B. r=2 C. r=3 **D.1<=r<=3**
+
+设这n个点共面，则其中任取4个点，例如P1,P2,P3和P4也必共面。于是
+
+<img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}&space;x_1&space;&&space;y_1&space;&&space;z_1&space;&&space;1\\&space;x_2&space;&&space;y_2&space;&&space;z_2&space;&&space;1\\&space;x_3&space;&&space;y_3&space;&&space;z_3&space;&&space;1\\&space;x_4&space;&&space;y_4&space;&&space;z_4&space;&&space;1&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;x_1&space;&&space;y_1&space;&&space;z_1&space;&&space;1\\&space;x_2-x_1&space;&&space;y_2-y_1&space;&&space;z_2-z_1&space;&&space;0\\&space;x_3-x_1&space;&&space;y_3-y_1&space;&&space;z_3-z_1&space;&&space;0\\&space;x_4-x_1&space;&&space;y_4-y_1&space;&&space;z_4-z_1&space;&&space;0&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;x_2-x_1&space;&&space;y_2-y_1&space;&&space;z_2-z_1&space;\\&space;x_3-x_1&space;&&space;y_3-y_1&space;&&space;z_3-z_1&space;\\&space;x_4-x_1&space;&&space;y_4-y_1&space;&&space;z_4-z_1&space;\end{bmatrix}&space;=0" title="\begin{bmatrix} x_1 & y_1 & z_1 & 1\\ x_2 & y_2 & z_2 & 1\\ x_3 & y_3 & z_3 & 1\\ x_4 & y_4 & z_4 & 1 \end{bmatrix} = \begin{bmatrix} x_1 & y_1 & z_1 & 1\\ x_2-x_1 & y_2-y_1 & z_2-z_1 & 0\\ x_3-x_1 & y_3-y_1 & z_3-z_1 & 0\\ x_4-x_1 & y_4-y_1 & z_4-z_1 & 0 \end{bmatrix} = \begin{bmatrix} x_2-x_1 & y_2-y_1 & z_2-z_1 \\ x_3-x_1 & y_3-y_1 & z_3-z_1 \\ x_4-x_1 & y_4-y_1 & z_4-z_1 \end{bmatrix} =0" />
+
+最后一个行列式为0来自三点式平面方程，所以D项正确。
+
+反之，设1<=r<=3，则A中任取一个4阶矩阵，其对应的行列式必为零，因此4点必共面，所以这n个点必共面。
+
+
+
+
+
+## 多元函数微分
+
+
 
 ## 无穷级数
 (2016.19)已知函数f(x)可导，且f(0)=1,
@@ -126,6 +221,54 @@
 <img src="https://latex.codecogs.com/gif.latex?0<\lim_{n\rightarrow\infty}x_n<2" title="0<\lim_{n\rightarrow\infty}x_n<2" />
 
 题设得证。
+
+## 线性方程组
+(张宇八套卷(三).06)设A是3阶矩阵，
+<img src="https://latex.codecogs.com/gif.latex?\xi_1=(1,2,-2)^T,&space;\xi_2=(2,1,-1)^T,\xi_3=(1,1,t)^T," title="\xi_1=(1,2,-2)^T, \xi_2=(2,1,-1)^T,\xi_3=(1,1,t)^T," />
+是非齐次线性方程组Ax=b的解向量，其中
+<img src="https://latex.codecogs.com/gif.latex?b=(1,3,-2)^T" title="b=(1,3,-2)^T" />
+则
+
+A. t=-1时，必有r(A)=1
+
+B. t=-1时，必有r(A)=2
+
+**C. t!=-1时，必有r(A)=1**
+
+D. t!=-1时，必有r(A)=2
+
+记
+<img src="https://latex.codecogs.com/gif.latex?B=(\xi_1,\xi_2,\xi_3)=&space;\begin{bmatrix}&space;1&space;&&space;2&space;&&space;1\\&space;2&space;&&space;1&space;&&space;1\\&space;-2&space;&&space;-1&space;&&space;t&space;\end{bmatrix}&space;\rightarrow&space;\begin{bmatrix}&space;1&space;&&space;2&space;&&space;1\\&space;0&space;&&space;-3&space;&&space;-1\\&space;0&space;&&space;3&space;&&space;t&plus;2&space;\end{bmatrix}&space;\rightarrow&space;\begin{bmatrix}&space;1&space;&&space;2&space;&&space;1\\&space;0&space;&&space;-3&space;&&space;-1\\&space;0&space;&&space;0&space;&&space;t&plus;1&space;\end{bmatrix}" title="B=(\xi_1,\xi_2,\xi_3)= \begin{bmatrix} 1 & 2 & 1\\ 2 & 1 & 1\\ -2 & -1 & t \end{bmatrix} \rightarrow \begin{bmatrix} 1 & 2 & 1\\ 0 & -3 & -1\\ 0 & 3 & t+2 \end{bmatrix} \rightarrow \begin{bmatrix} 1 & 2 & 1\\ 0 & -3 & -1\\ 0 & 0 & t+1 \end{bmatrix}" />
+由
+<img src="https://latex.codecogs.com/gif.latex?\xi_1,\xi_2,\xi_3" title="\xi_1,\xi_2,\xi_3" />
+是Ax=b的解向量，t!=-1时，r(B)=3,知
+<img src="https://latex.codecogs.com/gif.latex?\xi_1,\xi_2,\xi_3" title="\xi_1,\xi_2,\xi_3" />
+线性无关，
+<img src="https://latex.codecogs.com/gif.latex?\xi_1-\xi_2,\xi_2-\xi_3" title="\xi_1-\xi_2,\xi_2-\xi_3" />
+是对应其次方程组Ax=0的两个线性无关解，故r(A)=<1
+
+若A=O，则Ax=b无解，故r(A)>0，综上r(A)=1
+
+## 随机事件和概率
+
+1. (张宇八套卷(二).07) 设A,B为两个事件，若P(B)>0,则下列结论正确的是（）
+
+A.<img src="https://latex.codecogs.com/gif.latex?P(A|A\cup&space;B)=P(A|B)" title="P(A|A\cup B)=P(A|B)" />
+
+B.<img src="https://latex.codecogs.com/gif.latex?P(A|A\cup&space;B)<P(A|B)" title="P(A|A\cup B)<P(A|B)" />
+
+C.<img src="https://latex.codecogs.com/gif.latex?P(A|A\cup&space;B)>P(A|B)" title="P(A|A\cup B)>P(A|B)" />
+
+D.<img src="https://latex.codecogs.com/gif.latex?P(A|A\cup&space;B)\geq&space;P(A|B)" title="P(A|A\cup B)\geq P(A|B)" />
+
+设P(A-B)=x,P(B-A)=y,P(AB)=z,
+
+<img src="https://latex.codecogs.com/gif.latex?P(A|A\cup&space;B)=\frac{P[A|(A\cup&space;B)]}{P(A\cup&space;B)}=\frac{P(A)}{P(A)&plus;P(B)-P(AB)}=\frac{x&plus;z}{x&plus;y&plus;z}" title="P(A|A\cup B)=\frac{P[A|(A\cup B)]}{P(A\cup B)}=\frac{P(A)}{P(A)+P(B)-P(AB)}=\frac{x+z}{x+y+z}" />
+
+<img src="https://latex.codecogs.com/gif.latex?P(A|B)=\frac{P(AB)}{P(B)}=\frac{z}{y&plus;z}" title="P(A|B)=\frac{P(AB)}{P(B)}=\frac{z}{y+z}" />
+
+D项正确！
+
 
 ## 一维随机变量函数的分布
 
