@@ -1,26 +1,15 @@
 # Speech Separation
 
-## Introduction
-
-语音分离是指将目标语音从背景干扰中分离出来的任务。传统上，语音分离被当作一个信号处理问题。最近出现一种新方法把语音分离作为监督学习问题处理，从训练数据中学习语音、说话人和背景噪声的判别模式(discriminative pattern)。
-
-- 语音增强（语音-非语音分离）
-
-- 说话人分离（多人谈话分离）
-
-- 语音混响削减
-
-- 麦克风阵列技术
-
-语音分离的目标是把目标语音从背景干扰中分离出来。在信号处理中，语音分离属于很基本的任务类型，应用范围很广泛，包括听力假体、移动通信、鲁棒的自动语音以及说话人识别。人类听觉系统能轻易地将一个人的声音和另一个人的分离开来。即使在鸡尾酒会那样的声音环境中，我们似乎也能毫不费力地在其他人的说话声和环境噪声的包围中听到一个人的说话内容。因此语音分离问题通常也被叫做「鸡尾酒会问题」（cocktail party problem），该术语由 Cherry 在他 1953 年那篇著名论文中提出 [22]。
-
 
 
 ## 语音分离的问题描述（数学描述、文字描述）、问题分类
 
+**语音分离**是指将目标语音从背景干扰中分离出来的任务。传统上，语音分离被当作一个信号处理问题,应用范围很广泛，包括听力假体、移动通信、鲁棒的自动语音以及说话人识别。人类听觉系统能轻易地将一个人的声音和另一个人的分离开来。即使在鸡尾酒会那样的声音环境中，我们似乎也能毫不费力地在其他人的说话声和环境噪声的包围中听到一个人的说话内容。因此语音分离问题通常也被叫做「鸡尾酒会问题」（cocktail party problem），该术语由 Cherry 在他 1953 年那篇著名论文中提出。最近出现一种新方法把语音分离作为监督学习问题处理，从训练数据中学习语音、说话人和背景噪声的判别模式(discriminative pattern)。
+
+
 鸡尾酒会问题(cocktail party problem)
 
-- n个人，n个麦克风。从n个麦克风得到一组数据：
+- n个人，m个麦克风。从m个麦克风得到一组数据：
 
   $$
   \left\{\mathrm{x}^{(i)}\left(x_{1}^{(i)}, x_{2}^{(i)}, \ldots, x_{n}^{(i)}\right) ; i=1, \dots, m\right\}
@@ -33,29 +22,79 @@ s\left(s_{1}, s_{2}, \dots, s_{n}\right)^{T}, \quad \mathrm{s} \in \mathbb{R}^{n
   $$
 s相互独立
   
-- A是一个未知的混合矩阵(mixing matrix),用来组合叠加信号s。
+- 在盲分离问题中,鸡尾酒会问题(假设无噪声的情况下)可以建模为一个free mixing model
+  $$
+  x=As
+  $$
+  where the mixing matrix A is unknown, we can recover the sources only using the observed data matrix X as soon as we know the mixing matrix A.
+  
+  [Blind Source Separation of Speech Signals using Mixing Matrix Estimation and Subspace Method](<https://www.ijert.org/research/blind-source-separation-of-speech-signals-using-mixing-matrix-estimation-and-subspace-method-IJERTCONV3IS12056.pdf>)
+  
+  
 
+In the monaural speech separation task, a linearly mixed single-microphone signal 
+$$
+y[t]=\sum^S_{s=1}x_s[t]
+$$
+is given, where t is the time index, and $x_s[t](s\in\{1,2,...,S\})$ are S individual source signals.
+
+
+
+
+根据分离对象的属性不同，分离方法可以分为
+
+- 语音增强（语音-非语音分离）
+
+- 说话人分离（多人谈话分离）
+
+- 语音混响削减
 
 根据传感器或麦克风的数量，分离方法可以分为
 
 - 单声道方法
-  - 传统方法：CASA、NMF
 - 阵列方法
-  由两个或更多的麦克风组成的阵列使用不同的语音分离方法。波束成形，或者说空间滤波器，通过恰当的阵列结构增强从特定的方向到达的信号，进而削减来自其它方向的干扰 。最简单的波束成形是一种延迟-叠加技术，能将来自目标方向的多个麦克风的信号以相同的相位相加，并根据相差削减来自其它方向的信号。噪声的削减量取决于阵列的间隔、尺寸和结构，通常随着麦克风数量和阵列长度的增加，削减量也会增加。显然，当目标源和干扰源被共置，或者很靠近的时候，空间滤波器是无法应用的。此外，在回声场景中，波束成形的效用大幅降低，对声源方向的判定变得模糊不清。
 
 ## 语音分离的历史发展流程（几种经典方法和派系，基于深度学习方法的派系）
 
+1953年，**Edward Colin Cherry(E.C. Cherry)**在论文 *Some experiments on the recognition of speech, with one and with two ears* 中提出鸡尾酒会问题。
 
+1990年，麦吉尔大学的**Albert Bregman**教授出版了《听觉场景分析（Auditory Scene Analysis）》,在书中提出了听觉场景分析理论ASA，后来被引入计算领域。
 
+2006年，Wang D. and Brown G.J.在"Computational auditory scene analysis: principles, algorithms, and applications"中提出了计算听觉场景分析，旨在建立像人类一样处理鸡尾酒会问题的智能系统用以分离混合的声音，根据听觉场景分析研究中发现的一些规则或机制来对鸡尾酒会问题进行建模。
 
+2013年，Wang等在*Towards scaling up classification based speech separation.*将时频单元级别的特征作为深度神经网络(Deep neural networks, DNN)的输入, 将学习到的特征和原始特征拼接在一起作为输入, 利用线性SVM进行二分类并得到IBM, 在一定程度上缓解了传统语音分离问题难以在大数据集上进行训练的问题。
 
-一种最近提出的方法将语音分离当作一个监督学习问题。监督语音分离的最初形成受CASA中时频掩模(time-frequency(T-F)masking)概念的启发。CASA的主要目标是理想二值掩模(ideal binary mask, IBM),表示信号是否控制混合信号时频表示中的一个T-F单元。听力研究显示，理想二值掩模能够显著提高正常听力者和听力受损者在嘈杂环境中的语音理解能力。以IBM作为计算目标，则语音分离变成了二值分类问题，这正是监督学习的一种基本形式。在这种情况下，IBM被当作训练中的目标信号或目标函数。在测试中，学习机器的目的就是估计 IBM，这也是监督语音分离的第一训练目标（参见 Sect. III）。
+2014年，Weninger等将信号估计(Signal approximation, SA)作为目标, 并将长短时记忆网络(Long-short term memory networks, LSTM)应用到语音分离问题中, 其实验结果显示LSTM比DNN在分离性能上更优。
+
+2015年， Sprechmann等提出每层产生不同时间分辨率的特征图的Wavelet pyramid scattering transform网络, 并将学习到的多时间分辨率特征作为深度神经网络, 卷积神经网络的输入。 实验结果显示使用了多时间分辨率的小波特征作为输入的模型在语音分离各项指标SDR, SIR和SAR上表现远超使用单一时间分辨率的短时傅里叶变换表示作为输入的模型。
+
+2015年，Zhang等利用集成学习的思想提出Multi-context networks, 对有不同尺度的上下文窗口时间长度的DNN的输出作平均(Multi-context averaging, MCA)或者堆栈(Multi-context stacking, MCS), 其中MCS模型的模块可以是基于时频掩蔽的模型, 基于频谱映射的模型和基于信号近似的模型; 实验结果显示Multi-context networks比单一固定上下文窗口时间长度的DNN在语音分离任务上效果更好.
+
+2016年，Hershey等将深度神经网络模型和谱聚类结合起来, 提出深度聚类(Deep clustering, DC)算法来解决排列问题(Permutation problem)和输出维度不匹配问题(Output dimension mismatch problem).
+
+2017年，Yu等提出帧级别的具有排列不变性的训练方法(Permutation invariant training, PIT)来解决排列问题，PIT方法的关键在于误差回传的时候计算预测输出序列与标注序列各种排列的均方差, 并选择最小均方差用于优化参数.
+
+2017年，Chen等根据人类听觉认知研究中的感知磁效应(Perceptual magnet effect)提出深度吸引子网络(Deep attractor network, DANet), 从而做到端到端训练.
+
+2018年，Yi Luo等为了解决语音分离的准确性，等待时间和计算成本等问题。并提升包括信号的相位和幅度的解耦，用于语音分离的频谱图表示的最优性，以及计算中的长延迟、谱图的不足，提出了一种用于时域语音分离的深度学习自动编码器框架（TasNet）。 TasNet使用Conv1D编码器来创建信号的表示，该信号被优化以提取单个扬声器。通过将加权函数（掩模）应用于编码器输出来实现扬声器提取。然后使用线性解码器将修改编码器表示反转为声音波形。使用由扩张的卷积组成的时间卷积网络找到掩模，其允许网络模拟语音信号的长期依赖性。
+
+![](https://ws1.sinaimg.cn/large/006ocvumly1g2w7ivqd4rj31ca0kxgp4.jpg)
+
+[**鸡尾酒会问题与相关听觉模型的研究现状与展望**](<http://html.rhhz.net/ZDHXBZWB/html/2019-2-234.htm>)
+
+Multi-channel techniques in dealing with the cocktail party problem:
+
+- Beamforming
+
+  A beamformer is spatial filter that operates on the outputs of a microphone array and forms a beam (directivity) pattern to enhance the desired speech coming from one direction when suppressing interfering speech or noise from other directions.
+
+- multi-channel blind source separation.
 
 ## 单通道监督学习语音分离的系统架构
 
 **基于时频域的单通道监督学习语音分离的系统架构**
 
-![1557294649386](C:\Users\kzs56\AppData\Roaming\Typora\typora-user-images\1557294649386.png)
+![](https://ws1.sinaimg.cn/large/006ocvumly1g2w8liudt3j314p0wwn2u.jpg)
 
 #### 1.Time-Frequency representation时频分解
 
@@ -185,16 +224,16 @@ STFT 对数幅度谱是在STFT 幅度谱的基础上取对数操作得到的, �
 
 ![](https://ws1.sinaimg.cn/large/006ocvumgy1g2tyku0yyej323114079l.jpg)
 
-#### 3.Separation Targets 分离目标
+#### 3.Training Criteria 分离目标
 
 1. 理想二值掩模(Ideal Binary Mask, IBM)
 
      The first training target used in supervised speech separation which is inspired by the *auditory masking phenomenon in audition* and *the exclusive allocation principle in auditory scene analysis*.
 
      The IBM is defined on a two-dimensional T-F representation of a noisy signal, such as a cochleagram or spectrogram：
-$$
-     I B M=\left\{\begin{array}{ll}{1,} & {\text { if } S N R(t, f)>L C} \\ {0,} & {\text { otherwise }}\end{array}\right.
-$$
+     $$
+I B M=\left\{\begin{array}{ll}{1,} & {\text { if } S N R(t, f)>L C} \\ {0,} & {\text { otherwise }}\end{array}\right.
+     $$
      where t and f denote time and frequency,respectively. The IBM labels every T-F unit as either target-dominant or interference-dominant. As a result, IBM estimation can naturally be treated as a supervised classification problem. A commonly used cost function for IBM estimation is cross-entropy.
 
 2. 理想浮值掩模(Ideal Ratio Mask, IRM)
@@ -213,7 +252,13 @@ $$
      $$
      where $\theta$ denotes the difference of the clean speech phase and the noisy speech phase within the T-F unit. The inclusion of the phase difference in the PSM leads to higher SNR, and tends to yield a better estimate of clean speech than the SMM.
 
-4. IAM
+4. Ideal  Amplitude Mask, IAM
+
+     Practically, we can use IAM defined as
+     $$
+     M_{s}^{\operatorname{IAM}}(t, f)=\frac{\left|\boldsymbol{X}_{s}(t, f)\right|}{|\boldsymbol{Y}(t, f)|}
+     $$
+     to reconstruct $\boldsymbol{X}_s$, because the magnitude spectra of the mixed speech $\boldsymbol{Y}$ is known during testing. IAMs have the constraint $0 \leq M_{s}^{\operatorname{IAM}}(t, f) \leq \infty$, although it is found empirically that the majority of the T-F units are in the range of $0 \leq M_{s}^{\mathrm{IAM}}(t, f) \leq 1$. Accordingly, softmax, sigmoid, and ReLU are possible activation functions for estimating IAMs in the implementation.
 
 5. Complex Ideal Ratio Mask, cIRM
 
@@ -336,13 +381,120 @@ p_{s}(s)=g^{\prime}(s)=\frac{e^{s}}{\left(1+e^{s}\right)^{2}}
 
 The NMF technique uses non-negative dictionaries to decompose the spectrogram of the mixture signal into speaker specific activations, and from these activations an isolated target signal can be approximated using the dictionaries.
 
-## Evaluation 
+![nmf_1](https://img-blog.csdn.net/20160421172752611)
+
+数学表达：
+
+$$
+V^{n\times m} \approx W^{n\times r} * H^{r\times m}
+$$
+其中，V是原矩阵，W即基矩阵，H为系数矩阵
+
+**为什么分解的矩阵是非负的呢？**
+1. 在音频处理的过程中，音频读入以矩阵形式存在，矩阵元素都是非负的，即 >=0。即在音频处理时，V本身就是非负的。那么在分解时，也必须保证W,H的元素非负。
+2. 非负性会引入稀疏
+3. 非负性会使计算过程进入部分解
+
+**为什么NMF可以用于语音分离？**
+
+由上述，NMF是一种压缩感知，会丢失信息。
+
+我一直认为，NMF是降维方法，将原始较大的空间（维度），用另外一个小空间（维度）来表征。
+
+那么，如果丢失的维度（空间）是噪声空间，是不是就可以认为起到语音分离的作用了？如果分解所得的基矩阵 W 是原始信号的基本特征，那么是不是就可以达到一种语音分离的效果。这其实和神经网络类似，在进行学习时，我们认为神经网络学习到的是task本身的潜在规律，再以此规律求解或回归或分类问题。
+
+
+
+**R选择困难**
+
+- 数据拟合：R越大那么对于数据拟合更好
+- 模型复杂性：一个更小的R模型更简单（易于预测、少输入参数等）
+
+**解不唯一**
+对于V=WH;W>=0,H>=0，那么任意一个矩阵Q有 
+$$
+W Q>=0, Q^{-1} H>=0
+$$
+这就提供了一个可以替换的因子$V=W H=(W Q)\left(Q^{-1} H\right)$,特殊情况下，Q可以为任意非负广义置换矩阵。虽然解不唯一，但是也不用太担心，一般情况下解不唯一仅仅是基向量$W_k$的缩放和转置，意思就是换来换去还是它自己本身。
+
+
+
+在语音处理中, 一种最广泛的做法是令 WW和 H 非负, 从而得到非负矩阵分解(Non-negative matrix factorization, NMF). NMF能够挖掘到语音或噪音中非负数据的基本谱模式.在NMF的基础上引入其他约束, 则可以得到NMF的不同变种.稀疏NMF对NMF加入稀疏约束, 来提高分解的鲁棒性.卷积NMF则将频谱 X 分解成矩阵卷积的形式来对时间依赖进行建模, 此时基矩阵随时间变化, 每个时刻的基矩阵编码了该时刻的频谱, 激活矩阵也对应变化.
+
+![](https://ws1.sinaimg.cn/large/006ocvumly1g2w85d1ptwj311j0oy7tv.jpg)
+
+
+[NMF详解（一）——什么是NMF](<https://zhuanlan.zhihu.com/p/55644116>)
+
+[NMF 非负矩阵分解 -- 原理与应用](https://blog.csdn.net/qq_26225295/article/details/51211529)
+
+[Music&Audio Computing Lab, citi.sinica Lecture 9 Source Separation](<http://mac.citi.sinica.edu.tw/~yang/teaching/lecture09_separation.pdf>)
+
+## Performance Criteria 
+
+**Source to Distortion Ratio, SDR**
+$$
+\mathrm{SDR} :=10 \log _{10} \frac{ \| s_{\text { target }}\left\|^{2}\right.}{ \| e_{\text { interf }}+e_{\text { noise }}+e_{\text { artif }}\left\|^{2}\right.}
+$$
+**Source to Interferences Ratio, SIR**
+$$
+\mathrm{SIR} :=10 \log _{10} \frac{ \| s_{\text { target }}\left\|^{2}\right.}{ \| e_{\text { interf }}\left\|^{2}\right.}
+$$
+**Source to Artifacts Ratio, SAR**
+$$
+\mathrm{SAR} :=10 \log _{10} \frac{ \| s_{\text { target }}+e_{\text { interf }}+e_{\text { noise }}\left\|^{2}\right.}{ \| e_{\text { artif }}\left\|^{2}\right.}
+$$
+
+其中：
+
+
+$$
+\begin{aligned} 
+s_{\text { target }} & :=P_{s_{j}} \widehat{s}_{j} 
+\\ e_{\text { interf }} & :=P_{\mathbf{s}} \widehat{s}_{j}-P_{s_{j}} \widehat{s}_{j} 
+\\ e_{\text { noise }} & :=P_{\mathbf{s}, \mathbf{n}} \widehat{s}_{j}-P_{\mathbf{s}} \widehat{s}_{j} 
+\\ e_{\text { artif }} & :=\widehat{s}_{j}-P_{\mathbf{s}, \mathbf{n}} \widehat{s}_{j} 
+\\ P_{s_{j}} :=\Pi\left\{s_{j}\right\} 
+\\ P_{\mathbf{s}} :=\Pi\left\{\left(s_{j^{\prime}}\right)_{1 \leq j^{\prime} \leq n}\right\} 
+\\ P_{\mathbf{s}, \mathbf{n}} :=\Pi\left\{\left(s_{j^{\prime}}\right)_{1 \leq j^{\prime} \leq n},\left(n_{i}\right)_{1 \leq i \leq m}\right\}
+\end{aligned}
+$$
+
+[Performance measurement in blind audio source separation](https://hal.inria.fr/inria-00544230/document)
+
+**Short-time Objective Intelligibility, STOI**
+
+
+
+**Perceptual Evaluation of Speech Quality, PESQ**
+
+
+
+Word Error Rate, WER
+
+
+
+Equal Error Rate, EER
 
 ## Datasets
 
 **WSJ0(Wall Street Journal)** 
 
 **TIMIT** contains broadband recordings of 630 speakers of eight major dialects of American English, each reading ten phonetically rich sentences. TIMIT corpus includes time-aligned orthographic, phonetic and word transcriptions as well as a 16-bit, 16kHz speech waveform file for each utterance.
+
+VCTK
+
+[LibriSpeech](<http://www.openslr.org/12/>)
+
+[AVSpeech](<https://looking-to-listen.github.io/avspeech/download.html>)
+
+[NSynth: Neural Audio Synthesis](<https://magenta.tensorflow.org/nsynth>)
+
+[VoxCeleb1/VoxCeleb2](<http://www.robots.ox.ac.uk/~vgg/data/voxceleb/>)
+
+[CSTR VCTK Corpus ](<https://homepages.inf.ed.ac.uk/jyamagis/page3/page58/page58.html>)
+
+MUSDB18 <https://sigsep.github.io/datasets/musdb.html>
 
 ## Competition
 
@@ -352,13 +504,70 @@ The NMF technique uses non-negative dictionaries to decompose the spectrogram of
 
 ## SOTA
 
-Deep Clustering(DPCL++)
+**Deep Clustering(DPCL++)**
 
-Permutation Invariant Training(PIT)
+paper : <https://arxiv.org/pdf/1508.04306.pdf>
 
-Deep Attractor Network(DANet)
+Different from the supervised regression framework, they cast the separation problem as a segmentation problem. Specifically, they assumed that each T-F bin (t,f) of the mixed speech belongs to only one speaker. If we assign the same unique color to the bins belonging to the same speaker, the spectrogram is segmented into clusters, one for each speaker. The key observation in this framework is that during training we need only to know which bins belong to the same speaker(or cluster), and which is unambiguous, thus avoiding the label permutation problem.
 
-Conv-TasNet
+Because clustering is defined based on some distance between bis, Hershey et al.(2016) proposed to define the distance in the embedding space of the bins that the system can learn from the training data. If two bins belong to the same speaker, their distance in the embedding is small, and if two bins belong to different speakers, their distance in the embedding space is large.
+
+Precisely, given a raw input signal $\mathcal{y}$, its feature vector is defined as
+
+$$
+ \boldsymbol{Y}_{i}=g_{i}(\boldsymbol{y})(i \in\{1,2, \cdots, N\})
+$$
+
+, where $i$ is the T-F index $(t,f)$ in the case of audio signals. A deep neural network is used to transform input signal $\mathcal{x}$ into D-dimensional embeddings 
+
+$$
+\boldsymbol{V}=f_{\theta}(\boldsymbol{Y}) \in \mathbb{R}^{N \cdot D}
+$$
+
+,where each row vector $v_i$ has unit norm.
+
+Performing clustering in the embedding space will likely lead to a partition of {1,2,...,N}, which is close to the target. 
+
+Embeddings V is considered to implicitly represent an $N \times N$ estimated affinity matrix $V V^T$. 
+
+The target partition is represented by indicator $E={e_{i,s}}$, mapping each element i to each of S clusters; thus, $e_{i,s}=1$ if element i is in cluster c. 
+
+In this case, $EE^T$ is considered as binary affinity matrix that represents the cluster assignments in a permutation-independent way : 
+$$
+(EE^T)_{i,j}=\left\{\begin{array}{ll}{1,} & {\text { if }  i,j \in cluster} \\ {0,} & {\text { otherwise }}\end{array}\right.
+$$
+and $(EP)(EP)^T = EE^T$ for any permutation matrix
+
+Thus, we can learn affinity matrix $VV^T$, as a function of inputs X, to match affinities $EE^T$, by minimizing the training cost function, with respect to to $V=f_{\theta}(\boldsymbol{Y}) $
+$$
+C_{E}(\boldsymbol{V})=\left\|\boldsymbol{V} \boldsymbol{V}^{\mathrm{T}}-\boldsymbol{E} \boldsymbol{E}^{\mathrm{T}}\right\|_{\mathrm{F}}^{2}=\sum_{i, j}\left(\left\langle\boldsymbol{v}_{i}, \boldsymbol{v}_{j}\right\rangle-\left\langle\boldsymbol{e}_{i}, \boldsymbol{e}_{j}\right\rangle\right)^{2}=\sum_{i, j \cdot e_{i}=e_{j}}\left(\left|v_{i}-v_{j}\right|^{2}-1\right)+\sum_{i, j}\left\langle v_{i}, v_{j}\right\rangle^{2}
+$$
+summed over training examples, where $\|\cdot\|_{\mathrm{F}}^{2}$ is the squared Frobenius norm.
+
+
+
+**Permutation Invariant Training(PIT)**
+
+**Deep Attractor Network(DANet)**
+
+![](https://ws1.sinaimg.cn/large/006ocvumgy1g34k6q1abyj30j10ipwfc.jpg)
+
+Given the mixture signal with S sources, a K-dimensional embedding $\boldsymbol{V} \in \mathbb{R}^{F \cdot T \cdot K}$ of the mixed acoustic signal $\boldsymbol{Y}=[F \cdot T]$ , is learned by the neural network. During training, attractors $\boldsymbol{A} \in \mathbb{R}^{S \cdot K}$ are learned as
+$$
+A_{s, k}=\frac{\sum_{f, t} V_{k, f t} \cdot E_{s, f t}}{\sum_{f, t} E_{s, f t}}
+$$
+
+in the embedding space, where $\boldsymbol{E} \in \mathbb{R}^{F \cdot T \cdot S}$ is the dominant source membership function for each T-F bin. A mask M is then estimated in the embedding space as 
+$$
+M_{f, t, s}=\operatorname{Softmax}\left(\sum_{K} A_{s, k} \cdot V_{f t, k}\right)
+$$
+Finally, the neural network is trained to minimize
+$$
+\mathcal{L}=\sum_{f, t, s}\left\|\boldsymbol{X}_{f, t, s}-\boldsymbol{Y}_{f, t} \cdot M_{f, t, s}\right\|_{2}^{2}
+$$
+where X is the clean spectrogram of S sources.
+
+**Conv-TasNet**
 
 ## Still need to solve
 
@@ -367,12 +576,6 @@ Conv-TasNet
 - 远场效果差
 
 
-
-
-
-### Probabilistic Models(like Factorial GMM-HMM)
-
-model the temporal dynamics and the complex interactions of the target and competing speech signals. Unfortunately, these models assume and only work under close-set speaker conditions, i.e. the identity of the speakers must be known a prior.
 
 ### The Label Permutation Problem
 
@@ -456,6 +659,15 @@ If interfering speakers are allowed to change, but the target speaker is fixed, 
 
 In the last constrained case where none of the speakers are required to be the same between training and testing, this is called *speaker-independent*.
 
-# Inference
-
 [wikipedia-短时距傅里叶变换]([https://zh.wikipedia.org/wiki/%E7%9F%AD%E6%99%82%E8%B7%9D%E5%82%85%E7%AB%8B%E8%91%89%E8%AE%8A%E6%8F%9B](https://zh.wikipedia.org/wiki/短時距傅立葉變換))
+
+**Speak Dependent/Speaker Independent**
+
+Speech recognition is classified into two categories, speaker dependent and speaker independent.
+
+**Speaker dependent** systems are trained by the individual who will be using the system. These systems are capable of achieving a high command count and better than 95% accuracy for word recognition. The drawback to this approach is that the system only responds accurately only to the individual who trained the system. This is the most common approach employed in software for personal computers.
+
+**Speaker independent** is a system trained respond to a word regardless of who speakers. Therefore the system must respond to a large variety of speech patterns, inflections(音调变化) and enunciation's(清晰的发音) of the target word. The command word count is usually lower than the speaker dependent however high accuracy can still be maintain within processing limits. Industrial requirements more often need speaker independent voice systems, such as the AT&T system used in the telephone systems.
+
+
+
