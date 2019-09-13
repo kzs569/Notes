@@ -68,6 +68,8 @@ A text string can be encrypted by the given letters mapping table. For example, 
 
 As the string "encrypt" is encrypted as "tkzwsdf", then the "algorithm" is encrypted as ________ (Hint：1. please don’t include any quotes in your answer 2. This problem is judged by string matching, Please make sure your answer don't contain any blanks.).
 
+**答案：neopwmfbl**
+
 7、(1分)若串S1=‘ABCDEFG’, S2=‘9898’ ,S3=‘###’,S4=‘012345’,执行       
 
 concat(replace(S1,substr(S1,length(S2),length(S3)),S3),substr(S4,index(S2,‘8’),length(S2)))
